@@ -7,7 +7,7 @@ export const boxes = [];
 
 export const bombs = [];
 
-export const hero = null;
+export let hero = null;
 
 class MapBuilder {
 
@@ -44,8 +44,8 @@ class MapBuilder {
 
                     if(currentTile !== MapLayers.mapCode.EMPTY){
 
-                        tileSheetX = math.floor(((currentTile-1) % MapLayers.m_ATLAS_SHEET_COLUMNS)*MapLayers.m_TILE_SIZE);
-                        tileSheetY = math.floor(((currentTile-1) / MapLayers.m_ATLAS_SHEET_COLUMNS)*MapLayers.m_TILE_SIZE);
+                        tileSheetX = Math.floor((currentTile-1) % MapLayers.m_ATLAS_SHEET_COLUMNS)*MapLayers.m_TILE_SIZE;
+                        tileSheetY = Math.floor((currentTile-1) / MapLayers.m_ATLAS_SHEET_COLUMNS)*MapLayers.m_TILE_SIZE;
 
                         switch(currentTile){
 

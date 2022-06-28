@@ -4,11 +4,13 @@ import MapBuilder,{sprites,boxes,hero,bombs }from "./core/layer/MapBuilder.js";
 
 function BombTerrore(){
 
+    const canvas = document.querySelector('canvas');
+    
+    const gDrawingSurface = canvas.getContext('2d');
+
     const gAssetsToLoad = [];
     const gAssetsPath = "../assets/atlasing/";
     const gTileSet = new Image();
-
-    const canvas = document.getElementsByTagName('canvas');
 
     let loadedAssets = 0;
     
@@ -43,8 +45,6 @@ function BombTerrore(){
             GameState.STATE = GameState.BUILD_MAP;
         }
         
-        console.log(sprites);
-
         return;
     };
 
@@ -98,6 +98,18 @@ function BombTerrore(){
     };
 
     function render(){
+
+        gDrawingSurface.clearRect(0,0,canvas.width,canvas.height);
+
+        sprites.forEach(sprite => {
+
+            gDrawingSurface.drawImage(
+                gTileSet,sprite.sourceX,sprite.sourceY,
+                sprite.sourceWidth,sprite.sourceHeight,
+                sprite.x,sprite.y,sprite.width,sprite.height
+            );
+        });
+
         return;
     };
 };
