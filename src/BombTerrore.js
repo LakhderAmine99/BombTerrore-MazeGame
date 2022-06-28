@@ -26,7 +26,6 @@ function BombTerrore(){
         gAssetsToLoad.push(gTileSet);
 
         update();
-
     };
 
     function handleEventListeners(){
@@ -64,24 +63,34 @@ function BombTerrore(){
                     MapLayers.mapObjectsLayer
                 );
 
-                
-
                 GameState.STATE = GameState.PLAYING;
 
                 break;
             
             case GameState.PLAYING:
-                // playGame();
+                playGame();
                 break;
             
             case GameState.PAUSE:
-                // pauseGame();
+                pauseGame();
                 break;
             
             case GameState.GAME_OVER:
-                // endGame();
+                endGame();
                 break;            
         }
+    };
+
+    function playGame(){
+        return;
+    }
+
+    function endGame(){
+        return;
+    }
+
+    function pauseGame(){
+        return;
     }
 };
 
