@@ -1,6 +1,6 @@
 import {MapLayers} from "./core/layer/MapLayers.js";
 import {GameState} from "./core/state/State.js";
-import BuildMap from "./core/layer/BuildMap.js";
+import MapBuilder,{sprites,boxes,hero,bombs }from "./core/layer/MapBuilder.js";
 
 function BombTerrore(){
 
@@ -43,6 +43,8 @@ function BombTerrore(){
             GameState.STATE = GameState.BUILD_MAP;
         }
         
+        console.log(sprites);
+
         return;
     };
 
@@ -58,7 +60,7 @@ function BombTerrore(){
             
             case GameState.BUILD_MAP:
 
-                BuildMap.build(
+                MapBuilder.build(
                     MapLayers.mapLayer,
                     MapLayers.mapObjectsLayer
                 );
