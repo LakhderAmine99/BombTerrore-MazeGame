@@ -1,4 +1,5 @@
 import {MapLayers} from "./core/layer/MapLayers.js";
+import {GameState} from "./core/state/State.js"
 
 function BombTerrore(){
 
@@ -12,6 +13,11 @@ function BombTerrore(){
     this.run = function(){
 
         this._config();
+    };
+
+    function loadHandler(){
+
+        
     };
 };
 
