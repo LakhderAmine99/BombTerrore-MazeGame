@@ -78,20 +78,26 @@ function BombTerrore(){
             case GameState.GAME_OVER:
                 endGame();
                 break;            
-        }
+        };
+
+        render();
     };
 
     function playGame(){
         return;
-    }
+    };
 
     function endGame(){
         return;
-    }
+    };
 
     function pauseGame(){
         return;
-    }
+    };
+
+    function render(){
+        return;
+    };
 };
 
 const setup = () => {
