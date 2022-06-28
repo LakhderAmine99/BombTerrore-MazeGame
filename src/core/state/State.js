@@ -3,9 +3,8 @@ const GameState = {
     BUILD_MAP:1,
     PLAYING:2,
     PAUSE:3,
-    GAME_OVER:4
+    GAME_OVER:4,
+    STATE:0
 }
-
-GameState.STATE = GameState.LOADING;
 
 export {GameState};

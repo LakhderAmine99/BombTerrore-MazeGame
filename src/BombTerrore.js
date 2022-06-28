@@ -1,9 +1,16 @@
 import {MapLayers} from "./core/layer/MapLayers.js";
-import {GameState} from "./core/state/State.js"
+import {GameState} from "./core/state/State.js";
+import BuildMap from "./core/layer/BuildMap.js";
 
 function BombTerrore(){
 
+    const gAssetsToLoad = [];
+    const gAssetsPath = "../assets/atlasing/";
+    const gTileSet = new Image();
+
     const canvas = document.getElementsByTagName('canvas');
+
+    let loadedAssets = 0;
     
     this._config = function(){
 
@@ -13,12 +20,69 @@ function BombTerrore(){
     this.run = function(){
 
         this._config();
-    };
-
-    function loadHandler(){
-
         
+        gTileSet.addEventListener('load',loadHandler,false);
+        gTileSet.src = gAssetsPath + "final_atlasset.png";
+        gAssetsToLoad.push(gTileSet);
+
+        update();
+
     };
+
+    function handleEventListeners(){
+
+    };
+
+    function loadHandler(){        
+        
+        loadedAssets++;
+                        
+        if(loadedAssets == gAssetsToLoad.length){
+            
+            gTileSet.removeEventListener('load',loadHandler,false);
+
+            GameState.STATE = GameState.BUILD_MAP;
+        }
+        
+        return;
+    };
+
+    function update(){
+
+        requestAnimationFrame(update,canvas);
+
+        switch(GameState.STATE){
+
+            case GameState.LOADING:
+                console.log("Loading BombTerrore...");
+                break;
+            
+            case GameState.BUILD_MAP:
+
+                BuildMap.build(
+                    MapLayers.mapLayer,
+                    MapLayers.mapObjectsLayer
+                );
+
+                
+
+                GameState.STATE = GameState.PLAYING;
+
+                break;
+            
+            case GameState.PLAYING:
+                // playGame();
+                break;
+            
+            case GameState.PAUSE:
+                // pauseGame();
+                break;
+            
+            case GameState.GAME_OVER:
+                // endGame();
+                break;            
+        }
+    }
 };
 
 const setup = () => {
