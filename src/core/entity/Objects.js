@@ -13,7 +13,8 @@ export const SpriteObject = {
     vx : 0,
     vy : 0,
 
-    scrolable:0,
+    scrolable:true,
+    visible:false,
 
     centerX : function(){
 
