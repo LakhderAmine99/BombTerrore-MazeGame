@@ -170,8 +170,8 @@ function BombTerrore(){
             hero.vx = 0;
         }
 
-        hero.x += hero.vx;
-        hero.y += hero.vy;
+        hero.x = Math.max(64,Math.min(hero.x + hero.vx,canvas.width - 64));
+        hero.y = Math.max(64,Math.min(hero.y + hero.vy,canvas.height - 64));
 
         for(let i=0 ; i<boxes.length ; i++){
 
