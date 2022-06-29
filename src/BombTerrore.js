@@ -173,6 +173,11 @@ function BombTerrore(){
         hero.x += hero.vx;
         hero.y += hero.vy;
 
+        for(let i=0 ; i<boxes.length ; i++){
+
+            Collision.blockRectangle(hero,boxes[i]);
+        }
+
         return;
     };
 
