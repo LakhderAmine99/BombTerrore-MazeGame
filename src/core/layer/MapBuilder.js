@@ -7,6 +7,9 @@ export const boxes = [];
 
 export const bombs = [];
 
+/**
+ * @type {SpriteObject}
+ */
 export let hero = null;
 
 class MapBuilder {
@@ -81,9 +84,6 @@ class MapBuilder {
 
                             case MapLayers.mapCode.HERO:
 
-                                /**
-                                 * @type {SpriteObject}
-                                 */
                                 hero = Object.create(SpriteObject);
 
                                 hero.sourceX = tileSheetX;
@@ -134,9 +134,13 @@ class MapBuilder {
         return;
     };
 
-    buildGameOuterObjects(...outerObjects){
-        return
-    }
+    buildExtraGameObjects(...extraObjects){
+        
+        extraObjects.forEach(object => {
+
+            sprites.push(object);
+        });
+    };
 
     add(layer){
 

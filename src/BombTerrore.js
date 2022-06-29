@@ -1,16 +1,27 @@
 import {MapLayers} from "./core/layer/MapLayers.js";
 import {GameState} from "./core/state/State.js";
 import MapBuilder,{sprites,boxes,hero,bombs }from "./core/layer/MapBuilder.js";
+import Collision from "./core/collision/Collision.js";
 
 function BombTerrore(){
 
     const canvas = document.querySelector('canvas');
     
-    const gDrawingSurface = canvas.getContext('2d');
+    const gDrawingSurface = canvas.getContext('2d', {alpha: false});
 
     const gAssetsToLoad = [];
     const gAssetsPath = "../assets/atlasing/";
     const gTileSet = new Image();
+
+    const UP = 38;
+    const DOWN = 40;
+    const LEFT = 37;
+    const RIGHT = 39;
+
+    let moveUp = false;
+    let moveDown = false;
+    let moveLeft = false;
+    let moveright = false;
 
     let loadedAssets = 0;
     
@@ -27,10 +38,58 @@ function BombTerrore(){
         gTileSet.src = gAssetsPath + "final_atlasset.png";
         gAssetsToLoad.push(gTileSet);
 
+        handleEventListeners();
+
         update();
     };
 
     function handleEventListeners(){
+
+        window.addEventListener('keyup',(e) => {
+
+            switch(e.keyCode){
+
+                case UP:
+                    moveUp = false;
+                break;
+
+                case DOWN:
+                    moveDown = false;
+                break;
+
+                case LEFT:
+                    moveLeft = false;
+                break;
+
+                case RIGHT:
+                    moveright = false;
+                break;
+            }
+
+        },false);
+
+        window.addEventListener('keydown',(e) => {
+
+            switch(e.keyCode){
+
+                case UP:
+                    moveUp = true;
+                break;
+
+                case DOWN:
+                    moveDown = true;
+                break;
+
+                case LEFT:
+                    moveLeft = true;
+                break;
+
+                case RIGHT:
+                    moveright = true;
+                break;
+            }
+
+        },false);
 
     };
 
@@ -86,6 +145,34 @@ function BombTerrore(){
     };
 
     function playGame(){
+        
+        if(moveUp && !moveDown){
+            hero.vy = -4;
+        }
+
+        if(moveDown && !moveUp){
+            hero.vy = 4;
+        }
+
+        if(moveLeft && !moveright){
+            hero.vx = -4;
+        }
+
+        if(moveright && !moveLeft){
+            hero.vx = 4;
+        }
+
+        if(!moveDown && !moveUp){
+            hero.vy = 0;
+        }
+
+        if(!moveright && !moveLeft){
+            hero.vx = 0;
+        }
+
+        hero.x += hero.vx;
+        hero.y += hero.vy;
+
         return;
     };
 
