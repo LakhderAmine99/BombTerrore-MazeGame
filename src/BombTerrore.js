@@ -255,6 +255,13 @@ function BombTerrore(){
             Collision.blockRectangle(hero,boxes[i]);
         }
 
+        for(let j=0 ; j<bombs.length ; j++){
+
+            if(Collision.hitTestRectangle(hero,bombs[j])){
+
+            }
+        }
+
         return;
     };
 

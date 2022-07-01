@@ -11,8 +11,10 @@ class Collision {
      */
     hitTestRectangle(...sprites){
 
+        let hit = false;
+
         let sprite_1 = sprites[0];
-        let sprite_2 = sprites[0];
+        let sprite_2 = sprites[1];
 
         let vx = sprite_1.centerX() - sprite_2.centerX();
         let vy = sprite_1.centerY() - sprite_2.centerY();
@@ -24,11 +26,19 @@ class Collision {
 
             if(Math.abs(vy) < combinedHalfHeights){
 
-                return true;
+                hit = true;
+                
+            }else{
+
+                hit = false;
             }
+
+        }else{
+
+            hit = false;
         }
 
-        return false;
+        return hit;
     }
 
     /**
