@@ -1,10 +1,19 @@
 import {MapLayers} from "./MapLayers.js"
 import {SpriteObject} from "../entity/Objects.js";
 
+/**
+ * @type {SpriteObject}
+ */
 export const sprites = [];
 
+/**
+ * @type {SpriteObject}
+ */
 export const boxes = [];
 
+/**
+ * @type {SpriteObject}
+ */
 export const bombs = [];
 
 /**
