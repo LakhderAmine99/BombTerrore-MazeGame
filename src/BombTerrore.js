@@ -27,6 +27,8 @@ function BombTerrore(){
 
     let gameWorld = null;
     let camera = null;
+
+    let bombsDefused = 0;
     
     this._config = function(){
 
@@ -257,8 +259,15 @@ function BombTerrore(){
 
         for(let j=0 ; j<bombs.length ; j++){
 
-            if(Collision.hitTestRectangle(hero,bombs[j])){
+            if(Collision.hitTestRectangle(hero,bombs[j]) && bombs[j].visible){
 
+                bombs[j].visible = false;
+                bombsDefused++;
+
+                if(bombsDefused === bombs.length){
+                    
+                    GameState.STATE = GameState.GAME_OVER;
+                }
             }
         }
 
@@ -282,11 +291,15 @@ function BombTerrore(){
 
         sprites.forEach(sprite => {
 
-            gDrawingSurface.drawImage(
-                gTileSet,sprite.sourceX,sprite.sourceY,
-                sprite.sourceWidth,sprite.sourceHeight,
-                sprite.x,sprite.y,sprite.width,sprite.height
-            );
+            if(sprite.visible){
+
+                gDrawingSurface.drawImage(
+                    gTileSet,sprite.sourceX,sprite.sourceY,
+                    sprite.sourceWidth,sprite.sourceHeight,
+                    sprite.x,sprite.y,sprite.width,sprite.height
+                );
+            }
+
         });
 
         gDrawingSurface.restore();
