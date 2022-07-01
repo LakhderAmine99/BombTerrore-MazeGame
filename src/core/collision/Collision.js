@@ -5,6 +5,33 @@ class Collision {
     };
 
     /**
+     * @type {SpriteObject}
+     * @param  {...any} sprites 
+     * @returns {boolean} true if there's collision , false otherwise
+     */
+    hitTestRectangle(...sprites){
+
+        let sprite_1 = sprites[0];
+        let sprite_2 = sprites[0];
+
+        let vx = sprite_1.centerX() - sprite_2.centerX();
+        let vy = sprite_1.centerY() - sprite_2.centerY();
+
+        let combinedHalfWidths = sprite_1.halfWidth() + sprite_2.halfWidth();
+        let combinedHalfHeights = sprite_1.halfHeight() + sprite_2.halfHeight();
+
+        if(Math.abs(vx) < combinedHalfWidths){
+
+            if(Math.abs(vy) < combinedHalfHeights){
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * 
      * @type {SpriteObject}
      * @param  {...any} sprites 
