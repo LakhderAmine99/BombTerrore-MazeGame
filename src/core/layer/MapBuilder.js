@@ -90,8 +90,6 @@ class MapBuilder {
                                 hero.sourceY = tileSheetY;
                                 hero.x = column*MapLayers.m_TILE_SIZE;
                                 hero.y = row*MapLayers.m_TILE_SIZE;
-
-                                sprites.push(hero);
                             break;
 
                             case MapLayers.mapCode.BOMB_Y:
@@ -103,8 +101,10 @@ class MapBuilder {
 
                                 bomb_y.sourceX = tileSheetX;
                                 bomb_y.sourceY = tileSheetY;
-                                bomb_y.x = column*MapLayers.m_TILE_SIZE;
-                                bomb_y.y = row*MapLayers.m_TILE_SIZE;
+                                bomb_y.width = 32;
+                                bomb_y.height = 32;
+                                bomb_y.x = column*MapLayers.m_TILE_SIZE + 16;
+                                bomb_y.y = row*MapLayers.m_TILE_SIZE + 16;
 
                                 sprites.push(bomb_y);
                                 bombs.push(bomb_y);
@@ -130,6 +130,8 @@ class MapBuilder {
                 }
             }
         });
+
+        sprites.push(hero);
 
         return;
     };
