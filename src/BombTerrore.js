@@ -2,6 +2,7 @@ import {MapLayers} from "./core/layer/MapLayers.js";
 import {GameState} from "./core/state/State.js";
 import MapBuilder,{sprites,boxes,hero,bombs }from "./core/layer/MapBuilder.js";
 import Collision from "./core/collision/Collision.js";
+import { SpriteObject } from "./core/entity/Objects.js";
 
 function BombTerrore(){
 
@@ -29,6 +30,9 @@ function BombTerrore(){
     let camera = null;
 
     let bombsDefused = 0;
+
+    let timerBarObject = Object.create(SpriteObject);
+    let splashObject = Object.create(SpriteObject);
     
     this._config = function(){
 
@@ -42,6 +46,16 @@ function BombTerrore(){
         gTileSet.addEventListener('load',loadHandler,false);
         gTileSet.src = gAssetsPath + "final_atlasset.png";
         gAssetsToLoad.push(gTileSet);
+        
+        timerBarObject.sourceX = 256;
+        timerBarObject.sourceY = 128;
+        timerBarObject.sourceWidth = 256;
+        timerBarObject.sourceHeight = 128;
+        timerBarObject.width = 192;
+        timerBarObject.height = 64;
+
+        timerBarObject.x = Math.floor((canvas.width/2) - timerBarObject.width/2);
+        timerBarObject.y = 64/8;
 
         gameWorld = {
             x:0,
@@ -168,6 +182,8 @@ function BombTerrore(){
                     MapLayers.mapLayer,
                     MapLayers.mapObjectsLayer
                 );
+
+                MapBuilder.buildExtraGameObjects(timerBarObject,splashObject);
 
                 GameState.STATE = GameState.PLAYING;
 
