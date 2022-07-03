@@ -48,14 +48,17 @@ function BombTerrore(){
         gAssetsToLoad.push(gTileSet);
         
         timerBarObject.sourceX = 256;
-        timerBarObject.sourceY = 128;
+        timerBarObject.sourceY = 64;
         timerBarObject.sourceWidth = 256;
-        timerBarObject.sourceHeight = 128;
+        timerBarObject.sourceHeight = 64;
         timerBarObject.width = 192;
         timerBarObject.height = 64;
+        timerBarObject.scrolable = false;
 
-        timerBarObject.x = Math.floor((canvas.width/2) - timerBarObject.width/2);
-        timerBarObject.y = 64/8;
+        timerBarObject.x = Math.floor((canvas.width/2) - (timerBarObject.width/2));
+        timerBarObject.y = -4;
+
+        splashObject.visible = false;
 
         gameWorld = {
             x:0,
@@ -168,7 +171,7 @@ function BombTerrore(){
 
     function update(){
 
-        requestAnimationFrame(update,canvas);
+        let frame = requestAnimationFrame(update,canvas);
 
         switch(GameState.STATE){
 
@@ -303,16 +306,26 @@ function BombTerrore(){
         gDrawingSurface.clearRect(0,0,canvas.width,canvas.height);
 
         gDrawingSurface.save();
+        
         gDrawingSurface.translate(-camera.x,-camera.y);
 
         sprites.forEach(sprite => {
 
-            if(sprite.visible){
+            if(sprite.visible && sprite.scrolable){
 
                 gDrawingSurface.drawImage(
                     gTileSet,sprite.sourceX,sprite.sourceY,
                     sprite.sourceWidth,sprite.sourceHeight,
                     sprite.x,sprite.y,sprite.width,sprite.height
+                );
+            }
+
+            if(sprite.visible && !sprite.scrolable){
+
+                gDrawingSurface.drawImage(
+                    gTileSet,sprite.sourceX,sprite.sourceY,
+                    sprite.sourceWidth,sprite.sourceHeight,
+                    Math.floor(camera.x + sprite.x),Math.floor(camera.y + sprite.y),sprite.width,sprite.height
                 );
             }
 
